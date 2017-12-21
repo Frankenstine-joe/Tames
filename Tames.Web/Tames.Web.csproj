@@ -70,6 +70,7 @@
     <Content Include="Images\washedout.png" />
     <Content Include="Login.html" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\Controllers\appCtrl.js" />
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
