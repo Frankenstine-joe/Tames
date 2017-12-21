@@ -1,0 +1,113 @@
+﻿<html lang="en">
+<head>
+    <link href="Content/angular-material.css" rel="stylesheet" />
+    <link href="Style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1" />
+</head>
+<body ng-app="App" ng-cloak>
+
+    <div id="InnerBody" ng-controller="appCtrl">
+
+        <md-content class="md-padding">
+
+            <div layout="column">
+
+                <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4" flex="100">
+
+                    <md-toolbar class="md-theme-indigo">
+                        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+                    </md-toolbar>
+                    <md-content layout-padding="">
+                        <md-button ng-click="close()" class="md-primary" hide-gt-md="">
+                            Close Sidenav Left
+                        </md-button>
+                        <p hide="" show-gt-md="">
+                            This sidenav is locked open on your device. To go back to the default behavior,
+                            narrow your display.
+                        </p>
+                    </md-content>
+
+                </md-sidenav>
+
+            </div>
+
+            <div class="layout-practice">
+                <div layout="column">
+
+                    <div flex="10"></div>
+
+                    <!-- Main Login Form -->
+                    <div flex="80">
+
+                        <div layout="row">
+                            <md-card>
+                                <div class="pad-40">
+                                    <md-card-title>
+                                        <md-card-title-text>
+                                            <span class="md-headline">Login to continue</span>
+                                        </md-card-title-text>
+                                    </md-card-title>
+                                    <md-card-content>
+                                        <!-- Inputs -->
+                                        <!-- Email -->
+                                        <md-input-container class="md-block">
+                                            <!--<md-icon md-svg-src="~/Images/Svgs/ic_person_black_24px.svg" class="email"></md-icon>-->
+                                            <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+                                        </md-input-container>
+
+                                        <!-- Password -->
+                                        <md-input-container class="md-block">
+                                            <label>Password</label>
+                                            <input ng-model="user.name" type="password">
+                                        </md-input-container>
+
+                                        <!-- Remember Me -->
+                                        <md-input-container class="md-block">
+
+                                            <md-checkbox name="tos" ng-model="project.tos" required="">
+                                                Remember me
+                                            </md-checkbox>
+                                        </md-input-container>
+
+                                        <!-- /.Inputs -->
+                                    </md-card-content>
+                                    <md-card-actions layout="column" layout-align="start">
+                                        <md-button class="md-whiteframe-2dp">LOGIN</md-button>
+                                        <md-divider class="mar-t-b-20"></md-divider>
+                                        <md-button>Register</md-button>
+                                    </md-card-actions>
+                                </div>
+                            </md-card>
+
+                        </div>
+
+                    </div>
+                    <!-- /.Main Login Form -->
+
+                    <div flex="10"></div>
+
+                </div>
+            </div>
+
+        </md-content>
+
+    </div>
+
+    <!-- Angular Material Dependencies -->
+    <script src="Scripts/angular.js"></script>
+
+    <!-- Angular JS Animate -->
+    <script src="Scripts/angular-animate.js"></script>
+
+    <!-- Angular JS Aria -->
+    <script src="Scripts/angular-aria.js"></script>
+
+    <!-- Angular Material -->
+    <script src="Scripts/angular-material.js"></script>
+
+    <!-- Initialize Angular JS Module -->
+    <script src="Scripts/Modules/App.js"></script>
+
+</body>
+</html>
