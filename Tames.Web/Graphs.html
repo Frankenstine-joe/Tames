@@ -1,0 +1,250 @@
+﻿<html lang="en">
+<head>
+    <title>Graphs | Tames</title>
+    <meta name="viewport" content="initial-scale=1" />
+
+    <!-- Angular JS Material -->
+    <link href="Content/angular-material.css" rel="stylesheet" />
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+
+    <!-- Material Design Datatable -->
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/paghdalyogesh/responsive-md-data-table/master/css/md-data-table.css">
+
+    <!-- jQuery Datatable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.material.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
+
+    <!-- Custom CSS -->
+    <link href="Style.css" rel="stylesheet" />
+
+    <style>
+        body[dir=rtl] .hint {
+            right: 2px;
+            left: auto;
+        }
+    </style>
+
+</head>
+<body ng-app="App" ng-controller="appCtrl" ng-cloak layout="row">
+
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+
+        <md-toolbar class="md-tall md-hue-2">
+            <span flex></span>
+            <div layout="column" class="md-toolbar-tools-bottom inset">
+                <user-avatar></user-avatar>
+                <span></span>
+                <div>John Doe</div>
+                <div>johndoe@mail.com</div>
+            </div>
+        </md-toolbar>
+        <md-list flex="">
+            <md-list-item class="side-nav-item" ng-repeat="item in menu" ng-click="null">
+                <!--<img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}">-->
+
+                <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                <div class="md-list-item-text" layout="column">
+
+                    <p class="pad-l-30px">{{ item.title }}</p>
+                </div>
+            </md-list-item>
+
+            <md-divider></md-divider>
+            <md-subheader>Management</md-subheader>
+            <md-list-item class="side-nav-item" ng-repeat="item in admin" ng-click="null">
+                <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                <div class="md-list-item-text" layout="column">
+                    <p class="pad-l-30px">{{ item.title }}</p>
+                </div>
+            </md-list-item>
+
+
+        </md-list>
+    </md-sidenav>
+
+    <div layout="column" class="relative" layout-fill role="main">
+        <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+            <ng-md-icon icon="add"></ng-md-icon>
+        </md-button>
+        <md-toolbar ng-show="!showSearch">
+            <div class="md-toolbar-tools">
+                <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+                    <ng-md-icon icon="menu"></ng-md-icon>
+                </md-button>
+                <h3>
+                    Dashboard
+                </h3>
+                <span flex></span>
+                <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+                    <ng-md-icon icon="search"></ng-md-icon>
+                </md-button>
+                <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+                    <ng-md-icon icon="more_vert"></ng-md-icon>
+                </md-button>
+            </div>
+            <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
+                <md-tab id="tab1" aria-controls="tab1-content">
+                    Latest
+                </md-tab>
+                <md-tab id="tab2" aria-controls="tab2-content">
+                    Favorites
+                </md-tab>
+            </md-tabs>
+        </md-toolbar>
+        <md-toolbar class="md-hue-1" ng-show="showSearch">
+            <div class="md-toolbar-tools">
+                <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+                    <ng-md-icon icon="arrow_back"></ng-md-icon>
+                </md-button>
+                <h3 flex="10">
+                    Back
+                </h3>
+                <md-input-container md-theme="input" flex>
+                    <label>&nbsp;</label>
+                    <input ng-model="search.who" placeholder="enter search">
+                </md-input-container>
+                <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+                    <ng-md-icon icon="search"></ng-md-icon>
+                </md-button>
+                <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+                    <ng-md-icon icon="more_vert"></ng-md-icon>
+                </md-button>
+            </div>
+
+        </md-toolbar>
+        <md-content flex md-scroll-y>
+            <ui-view layout="column" layout-fill layout-padding>
+                <div class="inset" hide-sm></div>
+                <ng-switch on="data.selectedIndex" class="tabpanel-container">
+                    <div role="tabpanel"
+                         id="tab1-content"
+                         aria-labelledby="tab1"
+                         ng-switch-when="0"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="column" layout-align="center center">
+
+                        <!-- Charts -->
+                        <md-card class="width-90">
+                            <md-card-content>
+                                <canvas id="myChart" width="400" height="400"></canvas>
+                            </md-card-content>
+                        </md-card>
+
+                        <!-- Button -->
+                        <div layout-gt-sm="row" class="width-90">
+
+                            <md-button class="md-raised md-primary CustomSearchFilterBtn">Search</md-button>
+
+                        </div>
+
+                    </div>
+                    <div role="tabpanel"
+                         id="tab2-content"
+                         aria-labelledby="tab2"
+                         ng-switch-when="1"
+                         md-swipe-left="next()"
+                         md-swipe-right="previous()"
+                         layout="row" layout-align="center center">
+                        <md-card flex-gt-sm="90" flex-gt-md="80">
+                            <md-card-content>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+
+                </ng-switch>
+
+            </ui-view>
+        </md-content>
+    </div>
+
+    <!-- Angular Material Dependencies -->
+    <script src="Scripts/angular.js"></script>
+
+    <!-- Angular JS Animate -->
+    <script src="Scripts/angular-animate.js"></script>
+
+    <!-- Angular JS Aria -->
+    <script src="Scripts/angular-aria.js"></script>
+
+    <!-- Angular Material -->
+    <script src="Scripts/angular-material.js"></script>
+
+    <!-- Material Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>
+
+    <!-- Initialize Angular JS Module -->
+    <script src="Scripts/Modules/App.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+    <!-- Charts JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+
+    <!-- Angular Chart JS -->
+    <!--<script src="http://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>-->
+
+    <!-- jQuery Data Table -->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.material.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                columnDefs: [
+                    {
+                        targets: [0, 1, 2],
+                        className: 'mdl-data-table__cell--non-numeric'
+                    }
+                ]
+            });
+        });
+
+        //Chart JS
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

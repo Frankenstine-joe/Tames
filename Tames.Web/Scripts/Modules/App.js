@@ -21,11 +21,45 @@ var app = angular.module('App', ['ngMaterial', 'ngMdIcons']);
 
 app.controller('appCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog) {
 
+    //Basic Custom
     $scope.currentNavItem = 'page1';
 
     $scope.goto = function (page) {
         console.log("Goto " + page);
     }
+
+    //Material Design Table
+    $scope.selected = [];
+
+    $scope.query = {
+        order: 'name',
+        limit: 5,
+        page: 1
+    };
+
+    function success(desserts) {
+        $scope.desserts = desserts;
+    }
+
+    $scope.getDesserts = function () {
+        $scope.promise = $nutrition.desserts.get($scope.query, success).$promise;
+    };
+
+    //Search From
+    $scope.showHints = true;
+
+    $scope.user = {
+        name: "",
+        email: "",
+        social: "123456789",
+        phone: "N/A"
+    };
+
+    $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
+    'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
+    'WY').split(' ').map(function (state) {
+        return { abbrev: state };
+    });
 
 
     //Side Nav

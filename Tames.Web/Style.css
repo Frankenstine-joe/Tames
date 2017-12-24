@@ -65,7 +65,7 @@ md-sidenav {
     fill: #737373;
 }
 
-    /*md-sidenav ng-md-icon {
+/*md-sidenav ng-md-icon {
         position: relative;
         top: 5px;
     }*/
@@ -80,4 +80,41 @@ md-sidenav {
 
 .pad-l-30px {
     padding-left: 15px;
+    padding-top: 15px;
+}
+
+
+.mdl-button--raised.mdl-button--colored {
+    background: #00695c !important;
+    color: #fff;
+}
+
+.SearchFilterForm {
+    padding: 20px;
+}
+
+    .SearchFilterForm .md-datepicker-input-container {
+        width: 50%;
+    }
+
+.layout-fill {
+    height: -webkit-fill-available !important;
+}
+
+.CustomSearchFilterBtn {
+    width: 100%;
+    float: none;
+    margin: 0 auto;
+}
+
+.pad-divider {
+    margin-top: 40px;
+}
+
+.mar-divider-last {
+    margin-bottom: 40px !important;
+    display: block;
+}
+.width-90{
+    width:90%;
 }
